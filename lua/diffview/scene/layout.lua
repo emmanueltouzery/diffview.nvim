@@ -283,8 +283,10 @@ function Layout:sync_scroll()
   local target, max = nil, 0
 
   for _, win in ipairs(self.windows) do
-    local lcount = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
-    if lcount > max then target, max = win, lcount end
+    if api.nvim_win_is_valid(win.id) then
+      local lcount = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
+      if lcount > max then target, max = win, lcount end
+    end
   end
 
   local main_win = self:get_main_win()
