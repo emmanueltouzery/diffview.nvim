@@ -393,8 +393,13 @@ DiffView.update_files = debounce.debounce_trailing(
 
       for _, opr in ipairs(script) do
         if opr == EditToken.NOOP then
+          if not v.cur_files[ai] then
+            callback({ "The update was cancelled." })
+            return
+          end
+
           -- Update status and stats
-          local a_stats = v.cur_files[ai] and v.cur_files[ai].stats
+          local a_stats = v.cur_files[ai].stats
           local b_stats = v.new_files[bi].stats
 
           if a_stats then

@@ -290,6 +290,9 @@ function Layout:sync_scroll()
   end
 
   local main_win = self:get_main_win()
+  if not api.nvim_win_is_valid(main_win.id) then
+    return
+  end
   local cursor = api.nvim_win_get_cursor(main_win.id)
 
   for _, win in ipairs(self.windows) do
