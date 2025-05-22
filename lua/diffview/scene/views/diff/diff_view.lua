@@ -428,6 +428,10 @@ DiffView.update_files = debounce.debounce_trailing(
             end
           end
 
+          if not v.cur_files[ai] then
+            callback({ "The update was cancelled." })
+            return
+          end
           v.cur_files[ai]:destroy()
           table.remove(v.cur_files, ai)
 
