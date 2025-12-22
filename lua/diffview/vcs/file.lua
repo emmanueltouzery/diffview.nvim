@@ -238,7 +238,7 @@ File.create_buffer = async.wrap(function(self, callback)
 
   local fullname = pl:join("diffview://", self.adapter.ctx.dir, context, self.path)
 
-  self.bufnr = utils.find_named_buffer(fullname)
+  self.bufnr = utils.find_named_buffer(fullname, {loaded=true})
 
   if self.bufnr then
     callback(self.bufnr)
